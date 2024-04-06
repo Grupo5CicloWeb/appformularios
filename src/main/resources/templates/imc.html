@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="layout::head">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+<nav th:replace="layout::menu"></nav>
+<div class="card">
+    <div class="card-header">
+        CALCULADORA IMC
+    </div>
+    <div class="card-body">
+        <form th:action="@{/calcularimc}" method="post"
+              th:object="${imcmodel}">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control"
+                       id="txttalla"
+                       placeholder="name@example.com"
+                th:field="*{talla}">
+                <label for="txttalla">Ingrese su Talla</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control"
+                       id="txtpeso" placeholder="Password"
+                th:field="*{peso}">
+                <label for="txtpeso">Ingrese su Peso</label>
+            </div>
+            <button type="submit" class="btn btn-primary">CALCULAR</button>
+            <div class="alert" th:classappend="${colormensaje}"
+                 role="alert">
+                <span th:text="${resultado} ?: ''"></span>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
